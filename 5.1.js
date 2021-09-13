@@ -1,22 +1,24 @@
 const readlineSync = require("readline-sync");
+let name = "";
+let year = "";
+let cast = [];
+let askCast="";
+let myObject = { };
+let json = "";
+function askTVSerie() {
+    name = readlineSync.question("Your favorite serie ?");
+    year = readlineSync.question("In wich year does it product ?");
+    while (askCast!="exit") {
+        askCast=readlineSync.question("Names of the cast members ? (when finish, tape exit)");
+        if (askCast!="exit") cast.push(askCast);
+    }
+    myObject = {
+        "name": name,
+        "year": year,
+        "cast": cast
+    };
+    json = JSON.stringify(myObject);
+}
+askTVSerie();
 
-let askTvSerie = () => {
-  let name = readlineSync.question("Your favorite TV serie's name: ");
-  let year = readlineSync.question(
-    "Your favorite TV serie's production year: "
-  );
-  let names = readlineSync.question(
-    "Your favorite TV serie's names of the cast members: "
-  );
-
-  let object = {};
-
-  object.name = name;
-  object.productionYear = year;
-  object.cast = names;
-
-  console.log(JSON.stringify(object, undefined, 2));
-  return object;
-};
-
-askTvSerie();
+console.log(json);
